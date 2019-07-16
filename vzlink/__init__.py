@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 from flask_bcrypt import Bcrypt
 from hashids import Hashids
+from flask_migrate import Migrate
 
 
 app = Flask(__name__)
@@ -20,7 +21,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQL_DATABASE_URI']
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
+# Models
+from vzlink.models.user import User
+from vzlink.models.link import Link
+
+
+# Routes
 from vzlink.routes.api import api_routes
 from vzlink.routes.main import main_routes

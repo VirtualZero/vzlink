@@ -1,19 +1,101 @@
 from functools import wraps
 from vzlink import db, bcrypt
 from vzlink.models.user import User
+from vzlink.models.link import Link
 from flask import request, abort
-import os
+import os, re
 import jwt
 import string
 import random
 import datetime
 from vzlink import hashids_
+import requests
 
 
 def shorten_url():
     long_url = request.get_json()['url']
-    short_url = f'https://vzl.ink/{hashids_.encode(4587043, 177954, 28929824)}'
+    token = request.headers['X-API-KEY']
+
+    try:
+        decoded_token = jwt.decode(token, os.environ["JWT_SECRET_KEY"])
+
+        user = User.query.filter_by(
+            email=decoded_token['email']
+        ).first()
+
+        if not user:
+            return {
+                'Error': 'Not an active account.'
+            }, 401
+
+        if user.unique_id != decoded_token['unique_id'] or \
+            user.api_key != token:
+            return {
+                'Error': 'Access denied.'
+            }, 401
+
+    except jwt.exceptions.DecodeError:
+        return {
+            'Error': 'Invalid API key.'
+        }, 401
+
+    except:
+        abort(
+            500,
+            'Something went wrong.'
+        )
+
+    new_link = Link(
+        user.id,
+        long_url
+    )
+
+    db.session.add(new_link)
+    db.session.flush()
+
+    hash_id = hashids_.encode(new_link.id)
+    short_url = f'https://vzl.ink/{hash_id}'
+
+    new_link.hash_id = hash_id
+    db.session.commit()
+
+
+
+
+    
     return short_url
+
+
+def validate_url(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        long_url = request.get_json()['url']
+        valid_format = re.search('https*://.*\.\w{2,6}($|/.*)', long_url)
+        
+        if not valid_format:
+            abort(
+                401,
+                """Not a valid URL format."""
+            )
+
+        try:
+            url_request = requests.get(long_url)
+        
+        except:
+            abort(
+                401,
+                'Not a working URL.'
+            )
+
+        if url_request.status_code != 200:
+            abort(
+                401,
+                'Not a working URL.'
+            )
+
+        return f(*args, **kwargs)
+
+    return decorated
 
 
 def token_required(f):

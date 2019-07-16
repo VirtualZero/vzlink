@@ -14,7 +14,8 @@ from vzlink.helpers.api_helpers import (
     get_api_keys,
     make_new_refresh_api_key,
     update_password,
-    shorten_url
+    shorten_url,
+    validate_url
 )
 
 from vzlink.helpers.description_text import (
@@ -138,6 +139,7 @@ class Shorten(Resource):
         }
     )
     @token_required
+    @validate_url
     def post(self):
         return shorten_url(), 200
 

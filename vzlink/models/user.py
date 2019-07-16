@@ -1,7 +1,7 @@
 from vzlink import db
 
 class User(db.Model):
-    __tablename__ = 'User'
+    __tablename__ = 'user'
 
     id = db.Column(
         db.Integer,
