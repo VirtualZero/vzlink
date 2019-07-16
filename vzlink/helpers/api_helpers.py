@@ -58,12 +58,10 @@ def shorten_url():
 
     new_link.hash_id = hash_id
     db.session.commit()
-
-
-
-
     
-    return short_url
+    return {
+        'short_url': short_url
+    }
 
 
 def validate_url(f):
