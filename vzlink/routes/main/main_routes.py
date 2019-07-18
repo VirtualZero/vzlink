@@ -1,4 +1,4 @@
-from flask import redirect
+from flask import request, redirect, render_template
 from vzlink import app, db
 from vzlink.models.link import Link
 
@@ -10,3 +10,12 @@ def redirect_to_long_link(hash_id):
     ).first_or_404().long_link
 
     return redirect(long_link)
+
+
+@app.route('/')
+def home():
+
+    return render_template(
+        'landing.html',
+        title='VZLink'
+    )

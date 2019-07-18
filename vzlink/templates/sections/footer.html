@@ -1,0 +1,71 @@
+<footer class="page-footer grey darken-3">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l7">
+                <h5 class="white-text">Powered by You!</h5>
+                <p class="grey-text text-lighten-4">VirtualZero is powered by donations. If you find
+                    VirtualZero's applications useful and would like to support our efforts, please
+                    donate what you can. Donations help keep our servers running and ensure future projects.
+                </p>
+
+                <a class="hoverchange btn-flat white-text waves-effect  purple darken-1" href="https://donate.virtualzero.tech" target="_blank">
+                    Donate &nbsp;&nbsp;<i class="fas fa-donate"></i>
+                </a>
+            </div>
+            <div class="col s12 m12 l5">
+                <h5 class="white-text">Navigation</h5>
+                <div class="row">
+                    <div class="col s12 m12 l6">
+                        <ul>
+                            <li><a href="#home" class="active waves-effect waves-purple white-text" onclick="goToHome()">Home</a></li>
+                            <li>
+                                <span><a href="/api" class="waves-effect waves-purple white-text" target="_blank">API</a></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col s12 m12 l6">
+                        <ul>
+                            <li><a href="#download" class="waves-effect waves-purple white-text" onclick="goToDownload();">Download</a></li>
+                            <li><a href="#contact" class="waves-effect waves-purple white-text" onclick="gotoContact()">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright white-text">
+        <div class="container">
+            <div class="row no-padding-bottom">
+                <div class="col s12">
+                    © 2019 <a href="https://virtualzero.net" class="brand-logo white-text waves-effect waves-purple" id="logo-home-link">
+                        <img src="/static/images/logo/virtualzero_logo_svg_white.svg" style="height: 13px; width:auto"
+                            alt="VirtualZero">
+                        VirtualZero
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function goToHome() {
+        window.location = '/#home';
+        location.reload();
+    };
+</script>
+
+<script>
+    function goToDownload() {
+        window.location = '/#download';
+        location.reload();
+    };
+</script>
+
+<script>
+    function gotoContact() {
+        window.location = '/#contact';
+        location.reload();
+    };
+</script>

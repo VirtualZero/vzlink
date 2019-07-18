@@ -32,3 +32,4 @@ from vzlink.models.link import Link
 # Routes
 from vzlink.routes.api import api_routes
 from vzlink.routes.main import main_routes
+from vzlink.errors import errors

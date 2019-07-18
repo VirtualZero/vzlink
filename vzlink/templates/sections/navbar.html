@@ -1,0 +1,100 @@
+<nav class="nav-extended grey darken-3">
+    <div class="container">
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo white-text waves-effect waves-purple hide-on-small-only hide-on-med-only" id="logo-home-link">
+                <img src="/static/images/logo/virtualzero_logo_svg_white.svg"
+                    style="height: 27px; width:auto" alt="VirtualZero">
+                VirtualZero
+            </a>
+
+            <a href="/" class="brand-logo white-text waves-effect waves-purple hide-on-small-only hide-on-large-only center"
+                id="logo-home-link">
+                <img src="/static/images/logo/virtualzero_logo_svg_white.svg" style="height: 27px; width:auto"
+                    alt="VirtualZero">
+                VirtualZero
+            </a>
+
+            <a href="/" class="brand-logo white-text waves-effect waves-purple hide-on-med-and-up center"
+                id="logo-home-link">
+                <img src="/static/images/logo/virtualzero_logo_svg_white.svg" style="height: 26px; width:auto"
+                    alt="VirtualZero">
+            </a>
+
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+            <ul id="contact-info" class="right hide-on-small-only hide-on-med-only">
+                <li><i class="fas fa-mobile-alt white-text"></i> &nbsp;(813) 816-0123 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                <li><i class="far fa-envelope white-text"></i> &nbsp;info@virtualzero.tech</li>
+            </ul>
+        </div>
+
+        <ul id="mobile-nav" class="sidenav grey darken-3">
+            <div class="container">
+                <li>
+                    <a href="#" onclick="goToHome()" class="white-text">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/api" class="waves-effect waves-purple white-text" target="_blank">API</a>
+                </li>
+
+                <li>
+                    <a href="#download" class="waves-effect waves-purple white-text" onclick="goToDownload();">
+                        Download
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#contact" class="waves-effect waves-purple white-text" onclick="gotoContact()">
+                        Contact
+                    </a>
+                </li>
+            </div>
+        </ul>
+
+        <div class="nav-content hide-on-small-only hide-on-med-only">
+            <ul class="tabs tabs-transparent">
+                <li class="tab" id="home-tab"><a href="#home" class="active waves-effect waves-purple">Home</a></li>
+                <li class="tab">
+                    <span><a href="/api/v1" target="_blank" class="waves-effect waves-purple">API</a></span>
+                </li>
+
+                <li class="tab" id="download-tab"><a href="#download" class="waves-effect waves-purple">Download</a></li>
+                <li class="tab"><a href="#contact" class="waves-effect waves-purple">Contact</a></li>
+
+                <li class="right" style="padding-top: 12px">
+                    <i class="fab fa-facebook-f social-icon" onclick="window.open('https://www.facebook.com/VirtualZeroDev/', '_blank')"></i> &nbsp;&nbsp;
+                    <i class="fab fa-instagram social-icon" onclick="window.open('https://www.instagram.com/virtualzero_dev/', '_blank')"></i> &nbsp;&nbsp;
+                    <i class="fab fa-github social-icon" onclick="window.open('https://github.com/virtualzero', '_blank')"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    M.AutoInit();
+</script>
+
+<script>
+    function goToHome() {
+        window.location = '/#home';
+        location.reload();
+    };
+</script>
+
+<script>
+    function goToDownload() {
+        window.location = '/#download';
+        location.reload();
+    };
+</script>
+
+<script>
+    function gotoContact() {
+        window.location = '/#contact';
+        location.reload();
+    };
+</script>
