@@ -5,6 +5,7 @@ from flask_wtf import CSRFProtect
 from flask_bcrypt import Bcrypt
 from hashids import Hashids
 from flask_migrate import Migrate
+from flask_assets import Environment, Bundle
 
 
 app = Flask(__name__)
@@ -22,6 +23,25 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+
+# Assets
+assets = Environment(app)
+
+js = Bundle(
+    'js/materialize.min.js',
+    output='assets/vzlink.js',
+    filters='jsmin'
+)
+
+css = Bundle(
+    'css/style.css',
+    output='assets/vzlink.css',
+    filters='cssmin'
+)
+
+assets.register(f'vzlink_js', js)
+assets.register('vzlink_css', css)
 
 
 # Models

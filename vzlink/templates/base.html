@@ -16,8 +16,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script defer src="/static/fontawesome/fontawesome-all.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="/static/css/style.css" type="text/css">
-        <script type="text/javascript" src="/static/js/materialize.min.js"></script>
+        
+        {% assets "vzlink_css" %}
+            <link rel="stylesheet" href="{{ ASSET_URL }}" type="text/css">
+        {% endassets %}
+
+        {% assets "vzlink_js" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
         <title>{{title}}</title>
     </head>
 
@@ -43,7 +49,7 @@
                 </div>
             </div>
 
-            <div id="landing-content" style="display: none;" class="animated fadeIn">
+            <div id="landing-content" style="display: none;">
                 {% include "sections/navbar.html" %}
                 
                 {% block content %}
