@@ -15,35 +15,11 @@ import requests
 def shorten_url():
     long_url = request.get_json()['url']
     token = request.headers['X-API-KEY']
+    decoded_token = jwt.decode(token, os.environ["JWT_SECRET_KEY"])
 
-    try:
-        decoded_token = jwt.decode(token, os.environ["JWT_SECRET_KEY"])
-
-        user = User.query.filter_by(
-            email=decoded_token['email']
-        ).first()
-
-        if not user:
-            return {
-                'Error': 'Not an active account.'
-            }, 401
-
-        if user.unique_id != decoded_token['unique_id'] or \
-            user.api_key != token:
-            return {
-                'Error': 'Access denied.'
-            }, 401
-
-    except jwt.exceptions.DecodeError:
-        return {
-            'Error': 'Invalid API key.'
-        }, 401
-
-    except:
-        abort(
-            500,
-            'Something went wrong.'
-        )
+    user = User.query.filter_by(
+        email=decoded_token['email']
+    ).first()
 
     new_link = Link(
         user.id,
@@ -74,21 +50,6 @@ def validate_url(f):
             abort(
                 401,
                 """Not a valid URL format."""
-            )
-
-        try:
-            url_request = requests.get(long_url)
-        
-        except:
-            abort(
-                401,
-                'Not a working URL.'
-            )
-
-        if url_request.status_code != 200:
-            abort(
-                401,
-                'Not a working URL.'
             )
 
         return f(*args, **kwargs)
