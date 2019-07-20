@@ -1,12 +1,12 @@
 from flask import Flask
-import os
+from flask_assets import Environment, Bundle
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 from flask_bcrypt import Bcrypt
 from hashids import Hashids
 from flask_migrate import Migrate
-from flask_assets import Environment, Bundle
 from flask_cdn import CDN
+import os
 
 
 app = Flask(__name__)
@@ -19,11 +19,19 @@ hashids_ = Hashids(
 )
 
 
+# SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQL_DATABASE_URI']
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+
+# CDN
+app.config['CDN_HTTPS'] = True
+app.config['CDN_DOMAIN'] = os.environ['CDN_DOMAIN']
+app.config['CDN_HTTPS_ROOT'] = f'https://{app.config["CDN_DOMAIN"]}'
+CDN(app)
 
 
 # Assets
@@ -45,13 +53,6 @@ css = Bundle(
 
 assets.register('vzlink_js', js)
 assets.register('vzlink_css', css)
-
-
-# CDN
-app.config['CDN_HTTPS'] = True
-app.config['CDN_DOMAIN'] = os.environ['CDN_DOMAIN']
-app.config['CDN_HTTPS_ROOT'] = f'https://{app.config["CDN_DOMAIN"]}'
-CDN(app)
 
 
 # Models
