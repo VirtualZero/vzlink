@@ -253,9 +253,6 @@ def create_new_user():
     }
 
 
-
-
-
 def refresh_token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):

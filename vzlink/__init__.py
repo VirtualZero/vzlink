@@ -6,6 +6,7 @@ from flask_bcrypt import Bcrypt
 from hashids import Hashids
 from flask_migrate import Migrate
 from flask_assets import Environment, Bundle
+from flask_cdn import CDN
 
 
 app = Flask(__name__)
@@ -26,10 +27,12 @@ migrate = Migrate(app, db)
 
 
 # Assets
+app.config['FLASK_ASSETS_USE_CDN'] = True
 assets = Environment(app)
 
 js = Bundle(
     'js/materialize.min.js',
+    'fontawesome/fontawesome-all.min.js',
     output='assets/vzlink.js',
     filters='jsmin'
 )
@@ -40,8 +43,15 @@ css = Bundle(
     filters='cssmin'
 )
 
-assets.register(f'vzlink_js', js)
+assets.register('vzlink_js', js)
 assets.register('vzlink_css', css)
+
+
+# CDN
+app.config['CDN_HTTPS'] = True
+app.config['CDN_DOMAIN'] = os.environ['CDN_DOMAIN']
+app.config['CDN_HTTPS_ROOT'] = f'https://{app.config["CDN_DOMAIN"]}'
+CDN(app)
 
 
 # Models

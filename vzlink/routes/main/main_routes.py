@@ -1,6 +1,7 @@
-from flask import request, redirect, render_template
+from flask import request, redirect, render_template, url_for
 from vzlink import app, db
 from vzlink.models.link import Link
+import os
 
 
 @app.route('/<hash_id>')
@@ -14,8 +15,9 @@ def redirect_to_long_link(hash_id):
 
 @app.route('/')
 def home():
-
+    cdn_https = app.config['CDN_HTTPS_ROOT']
     return render_template(
         'landing.html',
-        title='VZLink'
+        title='VZLink',
+        cdn_https=cdn_https
     )

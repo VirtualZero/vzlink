@@ -136,7 +136,12 @@ class Shorten(Resource):
             200: 'Success',
             401: 'Not Authorized',
             500: 'Something went wrong.'
-        }
+        },
+        security='apikey'
+    )
+    @ns_shorten.header(
+        'X-API-KEY',
+        'Must include the API key in header.'
     )
     @token_required
     @validate_url
