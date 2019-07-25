@@ -1,30 +1,36 @@
 def ns_shorten_description_text():
-    return """The link-shortener namespace contains the routes for link-shortening services. \
-    <a href='#'>Click here</a> to view the routes."""
+    return """<p style='font-size: 16px;'>The link-shortener namespace \
+    contains the routes for link-shortening services. \
+    <a href='#'>Click here</a> to view the routes.</p>"""
 
 
 def shorten_description_text():
-    return """<p style='font-size: 16px;'>Make a POST request to this route to shorten a link. 
-    The request must include a URL as the payload and your API key in the header. The API will 
-    return a short URL as the response payload.</p>"""
+    return """<p style='font-size: 16px;'>Make a POST request to this 
+    route to shorten a link. The request must include a URL as the 
+    payload and your API key in the header. The API will return a 
+    short URL as the response payload.</p>"""
 
 
 
 def api_description_text():
-    return """<p style='font-size: 16px;'>VZLink is a RESTful API that provides link shortener services to independent applications. Similar to 
-    the popular link shortener service, Bitly, VZLink accepts a long URL, or link, and returns a much shorter and 
-    memorable link. This API is open source and the code can be viewed or 
-    cloned on <a href='https://github.com/VirtualZero/vzlink' target='_blank'>
+    return """<p style='font-size: 16px;'>VZLink is a RESTful API that 
+    provides link shortener services to independent applications. Similar 
+    to the popular link shortener service, Bitly, VZLink accepts a long URL, 
+    or link, and returns a much shorter and memorable link. This API is 
+    open source and the code can be viewed or cloned on 
+    <a href='https://github.com/VirtualZero/vzlink' target='_blank'>
     GitHub</a>.</p>"""
     #Once complete, add -
     #Additionally, a preconfigured virtual machine in OVA format \
-    #is available for download <a href='https://vzl.ink/#download' target='_blank'>here</a>.
+    #is available for download <a href='https://vzl.ink/#download' 
+    # target='_blank'>here</a>.
 
 
 def ns_user_description_text():
-    return """The user namespace contains the routes for user \
-    operations, such as creating an account, refreshing an API key, \
-    etc. <a href='#'>Click here</a> to view the routes."""
+    return """<p style='font-size: 16px;'>The user namespace contains \
+    the routes for user operations, such as creating an account, \
+    refreshing an API key, etc. <a href='#'>Click here</a> to view \
+    the routes.</p>"""
 
 
 def create_account_description_text():

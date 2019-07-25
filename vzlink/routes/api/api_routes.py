@@ -108,16 +108,14 @@ long_url = ns_shorten.model(
 # Endpoints
 @ns_user.route('/create-account')
 class CreateAccount(Resource):
-    @ns_user.expect(new_api_user)
     @ns_user.doc(
-        description=create_account_description_text()
-    )
-    @ns_user.doc(
+        description=create_account_description_text(),
         responses={
             200: 'Success',
             401: 'Not Authorized',
             500: 'Something went wrong.'
         })
+    @ns_user.expect(new_api_user)
     @create_account_creds_required
     def post(self):
         return create_new_user(), 200
@@ -125,7 +123,10 @@ class CreateAccount(Resource):
 
 @ns_shorten.route('/shorten')
 class Shorten(Resource):
-    @ns_shorten.expect(long_url)
+    @ns_shorten.header(
+        'X-API-KEY',
+        'Must include the API key in header.'
+    )
     @ns_shorten.doc(
         description=shorten_description_text(),
         responses={
@@ -135,10 +136,7 @@ class Shorten(Resource):
         },
         security='apikey'
     )
-    @ns_shorten.header(
-        'X-API-KEY',
-        'Must include the API key in header.'
-    )
+    @ns_shorten.expect(long_url)
     @token_required
     @validate_url
     def post(self):
@@ -147,21 +145,19 @@ class Shorten(Resource):
 
 @ns_user.route('/get-new-api-key')
 class GetNewAPIKey(Resource):
-    @ns_user.doc(
-        description=get_new_api_key_description_text()
-    )
-    @ns_user.doc(security='apikey')
     @ns_user.header(
         'X-API-KEY',
         'Must include the refresh API key in header.'
     )
     @ns_user.doc(
+        description=get_new_api_key_description_text(),
         responses={
             200: 'Success',
             401: 'Not Authorized',
             500: 'Something went wrong.'
         }
     )
+    @ns_user.doc(security='apikey')
     @refresh_token_required
     def get(self):
         return make_new_api_key(), 200
@@ -170,16 +166,14 @@ class GetNewAPIKey(Resource):
 @ns_user.route('/forgot-api-keys')
 class ForgotAPIKeys(Resource):
     @ns_user.doc(
-        description=forgot_api_keys_description_text()
-    )
-    @ns_user.expect(api_user)
-    @ns_user.doc(
+        description=forgot_api_keys_description_text(),
         responses={
             200: 'Success',
             401: 'Not Authorized',
             500: 'Something went wrong.'
         }
     )
+    @ns_user.expect(api_user)
     @creds_required
     def post(self):
         return get_api_keys(), 200
@@ -188,16 +182,14 @@ class ForgotAPIKeys(Resource):
 @ns_user.route('/get-new-refresh-api-key')
 class GetNewRefreshAPIKey(Resource):
     @ns_user.doc(
-        description=get_new_refresh_api_key_description_text()
-    )
-    @ns_user.expect(api_user)
-    @ns_user.doc(
+        description=get_new_refresh_api_key_description_text(),
         responses={
             200: 'Success',
             401: 'Not Authorized',
             500: 'Something went wrong.'
         }
     )
+    @ns_user.expect(api_user)
     @creds_required
     def post(self):
         return make_new_refresh_api_key(), 200
@@ -206,16 +198,14 @@ class GetNewRefreshAPIKey(Resource):
 @ns_user.route('/update-password')
 class UpdatePassword(Resource):
     @ns_user.doc(
-        description=update_password_description_text()
-    )
-    @ns_user.expect(new_password)
-    @ns_user.doc(
+        description=update_password_description_text(),
         responses={
             200: 'Success',
             401: 'Not Authorized',
             500: 'Something went wrong.'
         }
     )
+    @ns_user.expect(new_password)
     @creds_required
     def post(self):
         return update_password(), 200
