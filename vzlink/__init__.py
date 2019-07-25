@@ -35,7 +35,7 @@ CDN(app)
 
 
 # Assets
-app.config['FLASK_ASSETS_USE_CDN'] = True
+#app.config['FLASK_ASSETS_USE_CDN'] = True
 assets = Environment(app)
 
 js = Bundle(

@@ -1,24 +1,27 @@
 from flask_wtf import FlaskForm
 from wtforms import (
-    StringField, 
-    PasswordField, 
-    HiddenField, 
-    SelectField,
-    TextAreaField
+    StringField
 )
 from wtforms.validators import (
     DataRequired, 
-    email, 
-    Length, 
-    EqualTo, 
-    ValidationError
+    Regexp
 )
-from snypit import db, bcrypt
-from snypit.models.user_models import User
-from flask import flash
 
 
-class LoginForm(FlaskForm):
+class URL_Form(FlaskForm):
+    url = StringField(
+        None,
+        [
+            DataRequired(),
+            Regexp(
+                'https{0,1}://.*\..+',
+                message='Please enter a valid domain or URL.'
+            )
+        ]
+    )
+
+
+""" class LoginForm(FlaskForm):
     def valid_user(form, field):
         user = User.query.filter_by(
             email=field.data
@@ -277,71 +280,4 @@ class ResetPasswordForm(FlaskForm):
 
     email = HiddenField(
         "email"
-    )
-
-
-class NewSnippetForm(FlaskForm):
-    def valid_language(form, field):
-        if field.data == 'none||none':
-            raise ValidationError(
-                'This field is required.'
-            )
-
-    snippet_name = StringField(
-        'Snippet Title', 
-        [
-            DataRequired(
-                message='This field is required.'
-            ),
-            Length(
-                max=150
-            )
-        ]
-    )
-
-    language = SelectField(
-        'Choose Language',
-        [
-            DataRequired(
-                message='This field is required.'
-            ),
-            valid_language
-        ],
-        choices=[
-            ('none||none', 'Choose Language'),
-            ('C||clike', 'C'),
-            ('CPlusPlus||clike', 'C++'),
-            ('C#||clike', 'C#'),
-            ('CSS||css', 'CSS'),
-            ('HTML||xml', 'HTML'),
-            ('HTTP||http', 'HTTP'),
-            ('Java||clike', 'Java'),
-            ('JavaScript||javascript', 'JavaScript'),
-            ('Jinja2||jinja2', 'Jinja2'),
-            ('Nginx||nginx', 'Nginx'),
-            ('Perl||perl', 'Perl'),
-            ('PHP||php', 'PHP'),
-            ('PowerShell||powershell', 'PowerShell'),
-            ('Python||python', 'Python'),
-            ('Ruby||ruby', 'Ruby'),
-            ('SASS||sass', 'Sass'),
-            ('Shell||shell', 'Shell'),
-            ('SQL||sql', 'SQL'),
-            ('Visual Basic||vb', 'Visual Basic'),
-            ('VBScript||vbscript', 'VBScript'),
-            ('YAML||yaml', 'YAML'),
-            ('YAML Front Matter||yaml-frontmatter', 'YAML Front Matter'),
-        ]
-    )
-
-    description = TextAreaField(
-        'Description',
-        [
-            DataRequired(
-                message='This field is required.'
-            ),
-            Length(
-                max=1500
-            )
-        ]
-    )
+    ) """

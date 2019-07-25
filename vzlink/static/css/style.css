@@ -26,6 +26,10 @@ main {
     min-height: 100vh;
 }
 
+#landing-content {
+    min-height: 100vh;
+}
+
 #particles-js {
     position: fixed;
     height: 70vh;
