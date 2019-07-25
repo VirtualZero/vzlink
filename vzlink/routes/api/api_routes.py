@@ -20,14 +20,10 @@ from vzlink.helpers.api_helpers import (
 
 from vzlink.helpers.description_text import (
     api_description_text,
-    ns_datetime_description_text,
+    ns_shorten_description_text,
     ns_user_description_text,
-    get_current_timestamp_description_text,
+    shorten_description_text,
     create_account_description_text,
-    convert_timezones_description_text,
-    addition_description_text,
-    subtraction_description_text,
-    difference_description_text,
     get_new_api_key_description_text,
     forgot_api_keys_description_text,
     get_new_refresh_api_key_description_text,
@@ -65,7 +61,7 @@ app.register_blueprint(blueprint)
 # Namespaces
 ns_shorten = api.namespace(
     'link-shortener',
-    description='Link Shortener...'
+    description=ns_shorten_description_text()
 )
 
 ns_user = api.namespace(
@@ -131,7 +127,7 @@ class CreateAccount(Resource):
 class Shorten(Resource):
     @ns_shorten.expect(long_url)
     @ns_shorten.doc(
-        description='coming soon',
+        description=shorten_description_text(),
         responses={
             200: 'Success',
             401: 'Not Authorized',
