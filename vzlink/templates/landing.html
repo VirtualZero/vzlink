@@ -5,7 +5,7 @@
     <div class="row no-padding-bottom">
         <div class="col s12">
             <div class="section"></div>
-            <div class="card grey darken-3 z-depth-0 no-padding-bottm no-top-padding">
+            <div class="card grey darken-3 z-depth-0 no-top-padding">
                 <div class="card-content">
                     <div class="row no-padding-bottom">
                         <div class="col s12">
@@ -23,7 +23,7 @@
                         </div>
                     </div>
 
-                    <div class="row ">
+                    <div class="row">
                         <form action="/app/get-short-link" method="POST" id="short-link-form">
                             <div class="col s12 m10 l10 input-field no-top-padding">
                                 {{ url_form.csrf_token }}
@@ -31,17 +31,103 @@
                                 <span class="helper-text red-text text-accent-1" style="display: none;" id="invalid-url"></span>
                             </div>
                             
-                            <div class="col s12 m2 l2">
-                                <button class="hoverchange btn-flat white-text center waves-effect purple darken-1 full-width-button" type="submit">
+                            <div class="col s12 m2 l2 center">
+                                <div id="short-link-preloader" style="display: none;">
+                                        <div class="preloader-wrapper small active">
+                                            <div class="spinner-layer spinner-blue-only">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                
+                                                <div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div>
+                                
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <button class="hoverchange btn-flat white-text center waves-effect purple darken-1 full-width-button" type="submit" id="shorter-link-button">
                                     Get Link &nbsp;<i class="fas fa-link"></i>
                                 </button>
                             </div>
                         </form>
                     </div>
+
+                    <div class="row no-padding-bottom" style="display: none;" id="short-link-textarea">
+                            <div class="col s12">
+                                <p>Your Short Link:</p>
+                        </div>
+                        <div class="col s12 m12 l10 waves-effect waves-purple" onclick="copyShortLink()">
+                            <div class="input-field no-padding">
+                                <textarea class="white-text materialize-textarea no-padding-bottom flow-text" disabled
+                                    id="display-short-link-text"></textarea>
+                                <span class="helper-text white-text">Click to Copy</span>
+                            </div>
+                        </div>
+
+                        <div class="col s12 m12 l2">
+                            <a class="hoverchange btn-flat white-text right waves-effect full-width-button purple darken-1 center"
+                                target="_blank" id="view-page-short-link" href="#">
+                                View Now! &nbsp;<i class="fas fa-rocket"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+                <div class="section"></div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function copyShortLink() {
+            link = document.getElementById('display-short-link-text')
+            link.removeAttribute('disabled');
+            link.select();
+            document.execCommand('copy');
+
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
+
+            else if (document.selection) {
+                document.selection.empty();
+            }
+
+            link.setAttribute('disabled', '');
+            M.toast({ html: '<p><i class="fas fa-2x fa-check green-text text-lighten-2 center"></i></p> &nbsp;&nbsp;&nbsp;<p>Link Copied!</p>', classes: 'grey darken-3 white-text' })
+        }
+</script>
+
+<script>
+    document.getElementById('short-link-form').addEventListener('submit', makeLink);
+    function makeLink(e) {
+        e.preventDefault();
+        document.getElementById('shorter-link-button').style.display = 'none';
+        document.getElementById('short-link-preloader').style.display = 'block';
+        const longURL = document.getElementById('url').value;
+        var csrf_token = "{{ csrf_token() }}";
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("POST", "/app/get-short-link");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRFToken", csrf_token);
+
+        xhr.onload = function () {
+            const r = JSON.parse(this.response);
+            document.getElementById('short-link-preloader').style.display = 'none';
+            document.getElementById('shorter-link-button').style.display = 'block';
+            document.getElementById('display-short-link-text').innerHTML = r['url'];
+            document.getElementById('view-page-short-link').href = r['url'];
+            document.getElementById('short-link-textarea').style.display = 'block';
+        }
+
+        xhr.send(JSON.stringify({ url: longURL }))
+    };
+</script>
 
 {% endblock %}
