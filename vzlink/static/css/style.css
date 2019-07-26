@@ -270,3 +270,7 @@ body::-webkit-scrollbar-thumb {
 .social-icon:hover {
     cursor: pointer;
 }
+
+#display-short-link-text:hover {
+    cursor: pointer;
+}
