@@ -1,176 +1,185 @@
 <div id="contact" class="scrollspy">
-    <div class="section"></div>
-    <div class="grey darken-3 white-text">
-        <div class="card grey darken-3 no-top-padding">
-            <div class="card-content">
-                <div class="row">
-                    <div class="col s12">
-                        <h3>
-                            Contact Us<i class="fas fa-info-circle right"></i>
-                        </h3>
-                    </div>
-                </div>
-        
-                <div class="row">
-                    <div class="col s12">
-                        <div id="contact-us-form-header">
-                            <div class="row">
-                                <div class="col s12">
-                                    <p class="flow-text">
-                                        If you have a question, comment, or concern, call us, email us, or send us a message
-                                        through the contact form below. Business hours are Monday through Friday, 
-                                        9:00 AM to 5:00 PM EST.
-                                    </p>
-
-                                    <div class="section"></div>
-                                    <div class="section"></div>
-                                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="section"></div>
+                <div class="card grey darken-3 no-top-padding white-text">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12">
+                                <h3>
+                                    Contact Us<i class="fas fa-info-circle right"></i>
+                                </h3>
                             </div>
-                            <div class="row">
-                                <div class="col s12 m12 l6 center">
-                                    <p class="flow-text">
-                                        <i class="fas fa-mobile-alt white-text"></i> &nbsp;(813) 816-0123
-                                    </p>
+                        </div>
+                
+                        <div class="row">
+                            <div class="col s12">
+                                <div id="contact-us-form-header">
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <p class="flow-text">
+                                                If you have a question, comment, or concern, call us, email us, or send us a message
+                                                through the contact form below. Business hours are Monday through Friday,
+                                                9:00 AM to 5:00 PM EST.
+                                            </p>
+                
+                                            <div class="section"></div>
+                                            <div class="section"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12 m12 l6 center">
+                                            <p class="flow-text">
+                                                <i class="fas fa-mobile-alt white-text"></i> &nbsp;(813) 816-0123
+                                            </p>
+                                        </div>
+                
+                                        <div class="col s12 m12 l6 center">
+                                            <p class="flow-text">
+                                                <i class="far fa-envelope white-text"></i> &nbsp;info@virtualzero.tech
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div class="col s12 m12 l6 center">
-                                    <p class="flow-text">
-                                        <i class="far fa-envelope white-text"></i> &nbsp;info@virtualzero.tech
+                
+                                <div id="contact-us-form-header-ty" style="display: none;">
+                                    <p class="flow-text animated fadeIn">
+                                        Thank You! Your message has been sent.
                                     </p>
                                 </div>
                             </div>
                         </div>
-        
-                        <div id="contact-us-form-header-ty" style="display: none;">
-                            <p class="flow-text animated fadeIn">
-                                Thank You! Your message has been sent.
+                
+                        <div id="contact-us-form-section">
+                            <form action="/submit-message" method="POST" id="contact-us-form">
+                                <div class="row flow-text white-text">
+                                    <div class="col s12">
+                                        <div class="section"></div>
+                                        <p>
+                                            Let us know what's on your mind:
+                                        </p>
+                                        <div class="section"></div>
+                                    </div>
+                                </div>
+                                <div class="row no-padding-bottom">
+                                    <div class="col s12 m12 l6 input-field">
+                                        <i class="material-icons prefix">person</i>
+                                        {{ contact_form.contact_first_name(class="has-character-counter white-text", maxlength="100", required="", datalength="100") }}
+                                        {{ contact_form.contact_first_name.label }}
+                
+                                        <span class="red-text text-accent-1 helper-text" style="display: none;"
+                                            id="fn-error-text"></span>
+                
+                                        {% for error in contact_form.contact_first_name.errors %}
+                                        <span class="red-text accent-1 helper-text">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                
+                                    <div class="col s12 m12 l6 input-field">
+                                        <i class="material-icons prefix">person</i>
+                                        {{ contact_form.contact_last_name(class="has-character-counter white-text", maxlength="100", required="", datalength="100") }}
+                                        {{ contact_form.contact_last_name.label }}
+                
+                                        <span class="red-text text-accent-1 helper-text" style="display: none;"
+                                            id="ln-error-text"></span>
+                
+                                        {% for error in contact_form.contact_last_name.errors %}
+                                        <span class="red-text accent-1 helper-text">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                
+                                <div class="row no-padding-bottom">
+                                    <div class="col s12 m12 l6 input-field">
+                                        <i class="material-icons prefix">mail</i>
+                                        {{ contact_form.contact_email(class="has-character-counter white-text", type="email", required="", maxlength="150", datalength="150")
+                                                                    }}
+                                        {{ contact_form.contact_email.label }}
+                
+                                        <span class="red-text text-accent-1 helper-text" style="display: none;"
+                                            id="email-error-text"></span>
+                
+                                        {% for error in contact_form.contact_email.errors %}
+                                        <span class="red-text accent-1 helper-text">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                
+                                    <div class="col s12 m12 l6 input-field">
+                                        <i class="material-icons prefix">phone</i>
+                                        {{ contact_form.contact_phone(class="has-character-counter white-text", maxlength="14", datalength="14") }}
+                                        {{ contact_form.contact_phone.label }}
+                
+                                        <span class="red-text text-accent-1 helper-text" style="display: none;"
+                                            id="phone-error-text"></span>
+                
+                                        {% for error in contact_form.contact_phone.errors %}
+                                        <span class="red-text accent-1 helper-text">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                
+                                <div class="row no-padding-bottom">
+                                    <div class="col s12 input-field ">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                        <i class="material-icons prefix">mode_edit</i>
+                                        {{ contact_form.message(class="materialize-textarea has-character-counter white-text", maxlength="500", required="", datalength="500") }}
+                                        {{ contact_form.message.label }}
+                
+                                        <span class="red-text text-accent-1 helper-text" style="display: none;"
+                                            id="message-error-text"></span>
+                
+                                        {% for error in contact_form.message.errors %}
+                                        <span class="red-text accent-1 helper-text">{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                
+                                <div class="row">
+                                    <div class="col s12 input-field">
+                                        <i class="material-icons prefix">add</i>
+                                        {{ contact_form.math_result(class="white-text", required="", min="0", max="18") }}
+                                        {{ contact_form.math_result.label }}
+                
+                                        <span class="red-text text-accent-1 helper-text" style="display: none;"
+                                            id="math-error-text"></span>
+                
+                                        <input type="hidden" name="rand_num1" value="" id="input-rand-num1" />
+                                        <input type="hidden" name="rand_num2" value="" id="input-rand-num2" />
+                
+                                        {% for error in contact_form.math_result.errors %}
+                                        <span class="red-text accent-1 helper-text">{{ error }}</span>
+                                        {% endfor %}
+                                        <p class="center"><span id="random-number1"></span> + <span id="random-number2"></span> = </p>
+                                    </div>
+                                </div>
+                
+                                <div class="row" id="contact-us-form-btns">
+                                    <div class="col s12">
+                                        <div id="contact-us-form-btn">
+                                            <button class="hoverchange btn-flat white-text right waves-effect  purple darken-1"
+                                                type="submit">
+                                                Send<i class="material-icons right">send</i>
+                                            </button>
+                                        </div>
+                
+                                        <div class="progress" style="display: none;" id="preloader">
+                                            <div class="indeterminate"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                
+                        <div id="thank-you-section" style="display: none;" class="animated fadeIn">
+                            <h3>
+                                Success!
+                            </h3>
+                            <p class="flow-text">
+                                Your message was sent.
                             </p>
                         </div>
                     </div>
-                </div>
-        
-                <div id="contact-us-form-section">
-                    <form action="/submit-message" method="POST" id="contact-us-form">
-                        <div class="row flow-text white-text">
-                            <div class="col s12">
-                                <div class="section"></div>
-                                <p>
-                                    Let us know what's on your mind:
-                                </p>
-                                <div class="section"></div>
-                            </div>
-                        </div>
-                        <div class="row no-padding-bottom">
-                            <div class="col s12 m12 l6 input-field">
-                                <i class="material-icons prefix">person</i>
-                                {{ contact_form.contact_first_name(class="has-character-counter white-text", maxlength="100", required="", datalength="100") }}
-                                {{ contact_form.contact_first_name.label }}
-
-                                <span class="red-text text-accent-1 helper-text" style="display: none;" id="fn-error-text"></span>
-    
-                                {% for error in contact_form.contact_first_name.errors %}
-                                    <span class="red-text accent-1 helper-text">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-        
-                            <div class="col s12 m12 l6 input-field">
-                                <i class="material-icons prefix">person</i>
-                                {{ contact_form.contact_last_name(class="has-character-counter white-text", maxlength="100", required="", datalength="100") }}
-                                {{ contact_form.contact_last_name.label }}
-
-                                <span class="red-text text-accent-1 helper-text" style="display: none;" id="ln-error-text"></span>
-        
-                                {% for error in contact_form.contact_last_name.errors %}
-                                    <span class="red-text accent-1 helper-text">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-        
-                        <div class="row no-padding-bottom">
-                            <div class="col s12 m12 l6 input-field">
-                                <i class="material-icons prefix">mail</i>
-                                {{ contact_form.contact_email(class="has-character-counter white-text", type="email", required="", maxlength="150", datalength="150")
-                                                    }}
-                                {{ contact_form.contact_email.label }}
-
-                                <span class="red-text text-accent-1 helper-text" style="display: none;" id="email-error-text"></span>
-        
-                                {% for error in contact_form.contact_email.errors %}
-                                    <span class="red-text accent-1 helper-text">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-        
-                            <div class="col s12 m12 l6 input-field">
-                                <i class="material-icons prefix">phone</i>
-                                {{ contact_form.contact_phone(class="has-character-counter white-text", maxlength="14", datalength="14") }}
-                                {{ contact_form.contact_phone.label }}
-
-                                <span class="red-text text-accent-1 helper-text" style="display: none;" id="phone-error-text"></span>
-        
-                                {% for error in contact_form.contact_phone.errors %}
-                                    <span class="red-text accent-1 helper-text">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-        
-                        <div class="row no-padding-bottom">
-                            <div class="col s12 input-field ">
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                                <i class="material-icons prefix">mode_edit</i>
-                                {{ contact_form.message(class="materialize-textarea has-character-counter white-text", maxlength="500", required="", datalength="500") }}
-                                {{ contact_form.message.label }}
-
-                                <span class="red-text text-accent-1 helper-text" style="display: none;" id="message-error-text"></span>
-                                
-                                {% for error in contact_form.message.errors %}
-                                    <span class="red-text accent-1 helper-text">{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col s12 input-field">
-                                <i class="material-icons prefix">add</i>
-                                {{ contact_form.math_result(class="white-text", required="", min="0", max="18") }}
-                                {{ contact_form.math_result.label }}
-
-                                <span class="red-text text-accent-1 helper-text" style="display: none;" id="math-error-text"></span>
-                                
-                                <input type="hidden" name="rand_num1" value="" id="input-rand-num1" />
-                                <input type="hidden" name="rand_num2" value="" id="input-rand-num2" />
-
-                                {% for error in contact_form.math_result.errors %}
-                                    <span class="red-text accent-1 helper-text">{{ error }}</span>
-                                {% endfor %}
-                                <p class="center"><span id="random-number1"></span> + <span id="random-number2"></span> = </p>
-                            </div>
-                        </div>
-        
-                        <div class="row" id="contact-us-form-btns">
-                            <div class="col s12">
-                                <div id="contact-us-form-btn">
-                                    <button
-                                        class="hoverchange btn-flat white-text right waves-effect  purple darken-1"
-                                        type="submit">
-                                        Send<i class="material-icons right">send</i>
-                                    </button>
-                                </div>
-        
-                                <div class="progress" style="display: none;" id="preloader">
-                                    <div class="indeterminate"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div id="thank-you-section" style="display: none;" class="animated fadeIn">
-                    <h3>
-                        Success!
-                    </h3>
-                    <p class="flow-text">
-                        Your message was sent.
-                    </p>
                 </div>
             </div>
         </div>

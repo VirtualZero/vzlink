@@ -4,4 +4,6 @@ export SQL_DATABASE_URI='mysql+pymysql://vzlink:vzlink@localhost:3306/vzlink'
 export JWT_SECRET_KEY='YOUR-JWT-SECRET-KEY'
 export JWT_REFRESH_KEY='YOUR-JWT-REFRESH-KEY'
 export CDN_DOMAIN='YOUR-CDN-DOMAIN'
+export MAIL_API_URL='YOUR-EMAIL-API-URL'
+export MAIL_API_KEY='YOUR-MAIL-API-KEY'
 export FLASK_APP=run.py

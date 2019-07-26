@@ -1,83 +1,88 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container white-text flow-text">
-    <div class="row no-padding-bottom">
-        <div class="col s12">
-            <div class="section"></div>
-            <div class="card grey darken-3 z-depth-0 no-top-padding">
-                <div class="card-content">
-                    <div class="row no-padding-bottom">
-                        <div class="col s12">
-                            <h3>
-                                VZLink
-                            </h3>
-
-                            <p>
-                                Use VZLink to create short, memorable links to replace those long, 
-                                and often impossible to remember, links to your favorite places on the web. 
-                                Simplify your internet experience with VZLink for free.
-                            </p>
-                            <div class="section"></div>
-                            <p>URL:</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <form action="/app/get-short-link" method="POST" id="short-link-form">
-                            <div class="col s12 m10 l10 input-field no-top-padding">
-                                {{ url_form.csrf_token }}
-                                {{ url_form.url(class="white-text", required="", pattern="https{0,1}://.*\..+", title="Enter a valid URL, i.e. https://github.com/VirtualZero/vzlink") }}
-                                <span class="helper-text red-text text-accent-1" style="display: none;" id="invalid-url"></span>
+<div id="home">
+    <div class="container white-text flow-text">
+        <div class="row no-padding-bottom">
+            <div class="col s12">
+                <div class="section"></div>
+                <div class="card grey darken-3 z-depth-0 no-top-padding">
+                    <div class="card-content">
+                        <div class="row no-padding-bottom">
+                            <div class="col s12">
+                                <h3>
+                                    VZLink
+                                </h3>
+    
+                                <p>
+                                    Use VZLink to create short, memorable links to replace those long,
+                                    and often impossible to remember, links to your favorite places on the web.
+                                    Simplify your internet experience with VZLink for free.
+                                </p>
+                                <div class="section"></div>
+                                <p>URL:</p>
                             </div>
-                            
-                            <div class="col s12 m2 l2 center">
-                                <div id="short-link-preloader" style="display: none;">
+                        </div>
+    
+                        <div class="row">
+                            <form action="/app/get-short-link" method="POST" id="short-link-form">
+                                <div class="col s12 m10 l10 input-field no-top-padding">
+                                    {{ url_form.csrf_token }}
+                                    {{ url_form.url(class="white-text", required="", pattern="https{0,1}://.*\..+", title="Enter a valid URL, i.e. https://github.com/VirtualZero/vzlink") }}
+                                    <span class="helper-text red-text text-accent-1" style="display: none;"
+                                        id="invalid-url"></span>
+                                </div>
+    
+                                <div class="col s12 m2 l2 center">
+                                    <div id="short-link-preloader" style="display: none;">
                                         <div class="preloader-wrapper small active">
                                             <div class="spinner-layer spinner-blue-only">
                                                 <div class="circle-clipper left">
                                                     <div class="circle"></div>
                                                 </div>
-                                
+    
                                                 <div class="gap-patch">
                                                     <div class="circle"></div>
                                                 </div>
-                                
+    
                                                 <div class="circle-clipper right">
                                                     <div class="circle"></div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+    
+                                    <button
+                                        class="hoverchange btn-flat white-text center waves-effect purple darken-1 full-width-button"
+                                        type="submit" id="shorter-link-button">
+                                        Get Link &nbsp;<i class="fas fa-link"></i>
+                                    </button>
                                 </div>
-
-                                <button class="hoverchange btn-flat white-text center waves-effect purple darken-1 full-width-button" type="submit" id="shorter-link-button">
-                                    Get Link &nbsp;<i class="fas fa-link"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="row no-padding-bottom" style="display: none;" id="short-link-textarea">
+                            </form>
+                        </div>
+    
+                        <div class="row no-padding-bottom" style="display: none;" id="short-link-textarea">
                             <div class="col s12">
                                 <p>Your Short Link:</p>
-                        </div>
-                        <div class="col s12 m12 l10 waves-effect waves-purple" onclick="copyShortLink()">
-                            <div class="input-field no-padding">
-                                <textarea class="white-text materialize-textarea no-padding-bottom flow-text" disabled
-                                    id="display-short-link-text"></textarea>
-                                <span class="helper-text white-text">Click to Copy</span>
+                            </div>
+                            <div class="col s12 m12 l10 waves-effect waves-purple" onclick="copyShortLink()">
+                                <div class="input-field no-padding">
+                                    <textarea class="white-text materialize-textarea no-padding-bottom flow-text" disabled
+                                        id="display-short-link-text"></textarea>
+                                    <span class="helper-text white-text">Click to Copy</span>
+                                </div>
+                            </div>
+    
+                            <div class="col s12 m12 l2">
+                                <a class="hoverchange btn-flat white-text right waves-effect full-width-button purple darken-1 center"
+                                    target="_blank" id="view-page-short-link" href="#">
+                                    View Now! &nbsp;<i class="fas fa-rocket"></i>
+                                </a>
                             </div>
                         </div>
-
-                        <div class="col s12 m12 l2">
-                            <a class="hoverchange btn-flat white-text right waves-effect full-width-button purple darken-1 center"
-                                target="_blank" id="view-page-short-link" href="#">
-                                View Now! &nbsp;<i class="fas fa-rocket"></i>
-                            </a>
-                        </div>
                     </div>
+                    <div class="section"></div>
                 </div>
-                <div class="section"></div>
             </div>
         </div>
     </div>
