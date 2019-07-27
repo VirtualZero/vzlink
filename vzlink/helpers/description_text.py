@@ -19,11 +19,11 @@ def api_description_text():
     or link, and returns a much shorter and memorable link. This API is 
     open source and the code can be viewed or cloned on 
     <a href='https://github.com/VirtualZero/vzlink' target='_blank'>
-    GitHub</a>.</p>"""
-    #Once complete, add -
-    #Additionally, a preconfigured virtual machine in OVA format \
-    #is available for download <a href='https://vzl.ink/#download' 
-    # target='_blank'>here</a>.
+    GitHub</a>. Additionally, a preconfigured virtual machine in OVA format \
+    is available for download <a href='https://vzl.ink/#download' 
+     target='_blank'>here</a>.</p>"""
+
+    
 
 
 def ns_user_description_text():
