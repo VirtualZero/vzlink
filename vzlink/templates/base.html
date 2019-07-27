@@ -60,11 +60,11 @@
                         <a href="/api/v1" class="waves-effect waves-purple white-text" target="_blank">API</a>
                     </li>
             
-                    {#<li>
+                    <li>
                         <a href="#download" class="waves-effect waves-purple white-text" onclick="goToDownload();">
                             Download
                         </a>
-                    </li>#}
+                    </li>
             
                     <li>
                         <a href="#contact" class="waves-effect waves-purple white-text" onclick="gotoContact()">
@@ -90,7 +90,8 @@
                         {% endfor %} 
                     {% endif %} 
                 {% endwith %}
-
+                
+                {% include "sections/download_section.html" %}
                 {% include "sections/contact_section.html" %}
                 <div class="section"></div>
             </div>
