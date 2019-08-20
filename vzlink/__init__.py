@@ -6,16 +6,18 @@ from flask_bcrypt import Bcrypt
 from hashids import Hashids
 from flask_migrate import Migrate
 from flask_cdn import CDN
+from flask_caching import Cache
 import os
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['APP_SECRET_KEY']
 csrf = CSRFProtect(app)
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 bcrypt = Bcrypt(app)
 hashids_ = Hashids(
     salt=os.environ['HASHIDS_SALT'],
-    alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789-_.~'
+    alphabet='abcdefghijklmnopqrstuvwxyz123456789-_.~'
 )
 
 

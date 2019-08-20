@@ -1,5 +1,5 @@
 from flask import request, redirect, render_template, jsonify
-from vzlink import app, db, csrf
+from vzlink import app, db, csrf, cache
 from vzlink.models.link import Link
 from vzlink.forms.forms import URL_Form, ContactForm
 from vzlink import hashids_
@@ -8,7 +8,9 @@ import os
 
 
 @app.route('/<hash_id>')
+@cache.cached()
 def redirect_to_long_link(hash_id):
+    print(hash_id)
     long_link = Link.query.filter_by(
         hash_id=hash_id
     ).first_or_404().long_link
